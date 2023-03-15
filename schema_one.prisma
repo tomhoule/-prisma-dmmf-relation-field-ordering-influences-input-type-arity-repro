@@ -1,0 +1,19 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DB_URL")
+}
+
+model B {
+bid Int @id
+b2fk Int?
+b2rf A? @relation(name: "two", fields: [b2fk], references: [aid])
+bfk Int
+brf A @relation(fields: [bfk], references: [aid])
+}
+
+model A {
+aid Int @id
+arf B[]
+arf2 B[] @relation("two")
+}
+
